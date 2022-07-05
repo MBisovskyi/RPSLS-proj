@@ -10,10 +10,4 @@ class Human(Player):
         if user_input > len(self.gestures):
             self.choose_gesture()
         gesture = self.gestures[user_input - 1]
-        return gesture 
-        
-    def chose_gesture(self):
-        print(self.choose_gesture())
-
-human = Human()
-human.chose_gesture()
+        return gesture
