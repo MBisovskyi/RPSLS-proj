@@ -5,6 +5,8 @@ class SinglePlayer:
     def __init__(self):
         self.player1 = Human()
         self.player2 = Ai()
+        self.player1_name = None
+        self.player2_name = 'Ai'
         self.player1_gesture = None
         self.player2_gesture = None
         self.player1_score_counter = 0
@@ -14,14 +16,17 @@ class SinglePlayer:
     def run_singleplayer(self):
          while self.player1_score_counter != 2 and self.player2_score_counter != 2:
             self.players_picked_gestures()
-            print(self.player2_gesture)
+            print(f'\n{self.player1_name} picks {self.player1_gesture}.\n{self.player2_name} picks {self.player2_gesture}.\n')
             self.compare_gestures()
-            print(f'Player has {self.player1_score_counter} and Ai has {self.player2_score_counter}')
+            print(f'\n          WINS\n{self.player1_name} has {self.player1_score_counter} and {self.player2_name} has {self.player2_score_counter}')
             self.round_counter += 1
             self.score_comparison()
 
+    def acquire_player_name(self):
+        self.player1_name = input('Enter your name: ')
+
     def players_picked_gestures(self):
-        self.player1_gesture = self.player1.picked_gesture()
+        self.player1_gesture = self.player1.picked_gesture(self.player1_name)
         self.player2_gesture = self.player2.picked_gesture()
 
     def compare_gestures(self):
@@ -40,86 +45,86 @@ class SinglePlayer:
 
     def tie_result(self):
         if self.player1_gesture == self.player2_gesture:
-            print(f'No one wins. Player picked {self.player1_gesture} and Ai picked {self.player2_gesture}!')
+            print(f'No one wins. {self.player1_name} picked {self.player1_gesture} and {self.player2_name} picked {self.player2_gesture}!')
 
     def rock_wins(self):
         if self.player2_gesture == 'Lizard' or self.player2_gesture == 'Scissors':
-            print(f'Player wins!')
+            print(f'{self.player1_name} wins!')
             print(f'Rock crushes {self.player2_gesture}')
             player1_wins = True 
         elif self.player2_gesture == 'Paper':
-            print(f'Ai wins. {self.player2_gesture} covers rock!')
+            print(f'{self.player2_name} wins. {self.player2_gesture} covers rock!')
             player1_wins = False 
         elif self.player2_gesture == 'Spock':
-            print(f'Ai wins. {self.player2_gesture} vaporizes rock!')
+            print(f'{self.player2_name} wins. {self.player2_gesture} vaporizes rock!')
             player1_wins = False 
         self.round_winner(player1_wins)
             
     def paper_wins(self):
         if self. player2_gesture == 'Rock':
-            print(f'Player wins!')
+            print(f'{self.player1_name} wins!')
             print(f'Paper covers Rock!')
             player1_wins = True
         elif self.player2_gesture == 'Spock':
-            print(f'Player wins!')
+            print(f'{self.player1_name} wins!')
             print(f'Paper disproves Spock!')
             player1_wins = True
         elif self.player2_gesture == 'Scissors':
-            print(f'Ai wins. {self.player2_gesture} cuts paper!')
+            print(f'{self.player2_name} wins. {self.player2_gesture} cuts paper!')
             player1_wins = False
         elif self.player2_gesture == 'Lizard':
-            print(f'Ai wins. {self.player2_gesture} eats paper!')
+            print(f'{self.player2_name} wins. {self.player2_gesture} eats paper!')
             player1_wins = False
         self.round_winner(player1_wins)
 
     def scissors_wins(self):
         if self.player2_gesture == 'Paper':
-            print(f'Player wins!')
+            print(f'{self.player1_name} wins!')
             print(f'Scissors cuts paper!')
             player1_wins = True
         elif self.player2_gesture == 'Lizard':
-            print(f'Player wins!')
+            print(f'{self.player1_name} wins!')
             print(f'Scissors decapitates Lizard!')
             player1_wins = True
         elif self.player2_gesture == 'Rock':
-            print(f'Ai wins. {self.ai_gesture} crushes scissors!')
+            print(f'{self.player2_name} wins. {self.player2_gesture} crushes scissors!')
             player1_wins = False
         elif self.player2_gesture == 'Spock':
-            print(f'Ai wins. {self.ai_gesture} smashes scissors!')
+            print(f'{self.player2_name} wins. {self.player2_gesture} smashes scissors!')
             player1_wins = False
         self.round_winner(player1_wins)
 
     def lizard_wins(self):
         if self.player2_gesture == 'Spock':
-            print(f'Player wins!')
+            print(f'{self.player1_name} wins!')
             print(f'Lizard poisons spock!')
             player1_wins = True
         elif self.player2_gesture == 'Paper':
-            print(f'Player wins!')
+            print(f'{self.player1_name} wins!')
             print(f'Lizard eats paper')
             player1_wins = True
         elif self.player2_gesture == 'Rock':
-            print(f'Ai wins. {self.ai_gesture} crushes lizard!')
+            print(f'{self.player2_name} wins. {self.player2_gesture} crushes lizard!')
             player1_wins = False
         elif self.player2_gesture == 'Scissors':
-            print(f'Ai wins. {self.ai_gesture} decapitates lizard!')
+            print(f'{self.player2_name} wins. {self.player2_gesture} decapitates lizard!')
             player1_wins = False
         self.round_winner(player1_wins)
 
     def spock_wins(self):
         if self.player2_gesture == 'Scissors':
-            print(f'Player wins!')
+            print(f'{self.player1_name} wins!')
             print(f'Spock smashes scissors!')
             player1_wins = True
         if self.player2_gesture == 'Rock':
-            print(f'Player wins!')
+            print(f'{self.player1_name} wins!')
             print(f'Spock vaporizes rock!')
             player1_wins = True
         elif self.player2_gesture == 'Lizard':
-            print(f'Ai wins. {self.ai_gesture} poisons spock!')
+            print(f'{self.player2_name} wins. {self.player2_gesture} poisons spock!')
             player1_wins = False
         elif self.player2_gesture == 'Paper':
-            print(f'Ai wins. {self.ai_gesture} disproves spock!')
+            print(f'{self.player2_name} wins. {self.player2_gesture} disproves spock!')
             player1_wins = False
         self.round_winner(player1_wins)
 
@@ -131,9 +136,9 @@ class SinglePlayer:
 
     def score_comparison(self):
         if self.player1_score_counter == 2:
-            print('Player won this game!')
+            print(f'{self.player1_name} won this game!')
         elif self.player2_score_counter == 2:
-            print('Ai won this game')
+            print(f'{self.player2_name} won this game')
     
 
 

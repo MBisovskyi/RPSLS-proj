@@ -23,6 +23,7 @@ class Game:
         print('1. Single game\n2. Multiplayer')
         user_input = input('Please, select a game mode: ')
         if user_input == '1':
+            self.single_player.acquire_player_name()
             self.single_player.run_singleplayer()
         if user_input == '2':
             self.multiplayer.aquire_players_names()
