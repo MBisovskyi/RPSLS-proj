@@ -1,10 +1,12 @@
 from ai import Ai
 from human import Human
 from single_player import SinglePlayer
+from multiplayer import Multiplayer
 
 class Game:
     def __init__(self):
         self.single_player = SinglePlayer()
+        self.multi_player = Multiplayer()
         self.ai = Ai()
         self.human = Human()
         self.rerun_game = None
@@ -43,7 +45,8 @@ class Game:
         if user_input == '1':
             self.single_player.run_singleplayer()
         if user_input == '2':
-            pass
+            self.multi_player.acquire_player_names()
+            self.multi_player.run_multi_player()
 
     def is_rerun_game(self):
         user_input = input('Would you like to play again? Y/N?" ').lower()
@@ -52,6 +55,9 @@ class Game:
             self.single_player.human_score_counter = 0
             self.single_player.ai_score_counter = 0
             self.single_player.round_counter = 0
+            self.multi_player.player_1_score_counter = 0
+            self.multi_player.player_2_score_counter = 0
+            self.multi_player.round_counter = 0
             self.run_game()
 
         else:
