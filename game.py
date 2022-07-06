@@ -1,12 +1,10 @@
-from ai import Ai
-from human import Human
 from single_player import SinglePlayer
+from multiplayer import Multiplayer
 
 class Game:
     def __init__(self):
         self.single_player = SinglePlayer()
-        self.ai = Ai()
-        self.human = Human()
+        self.multiplayer = Multiplayer()
         self.rerun_game = None
 
     def run_game(self):
@@ -15,22 +13,6 @@ class Game:
         self.game_mode()
         self.is_rerun_game()
     
-    # def run_multiplayer(self):
-    #      while self.player_1_counter != 2 and self.player_2_counter != 2:
-    #         self.players_picked_gestures()
-    #         print(self.player_1_gesture)
-    #         self.compare_gestures()
-    #         print(self.player_1_counter, self.player_2_counter)
-    #         self.round_counter += 1
-    #         self.score_comparison()
-    #      self.is_rerun_game()
-    #      if self.rerun_game == True:
-    #         self.rerun_game = False
-    #         self.player_1_counter = 0
-    #         self.player_2_counter = 0
-    #         self.run_game()
-    
-
     def greeting(self):
         print('Welcome to RPSLS!')
 
@@ -43,16 +25,19 @@ class Game:
         if user_input == '1':
             self.single_player.run_singleplayer()
         if user_input == '2':
-            pass
+            self.multiplayer.aquire_players_names()
+            self.multiplayer.run_multiplayer()
 
     def is_rerun_game(self):
         user_input = input('Would you like to play again? Y/N?" ').lower()
         if user_input == 'y' or user_input == 'yes':
             self.rerun_game = True
-            self.single_player.human_score_counter = 0
-            self.single_player.ai_score_counter = 0
+            self.single_player.player1_score_counter = 0
+            self.single_player.player2_score_counter = 0
             self.single_player.round_counter = 0
+            self.multiplayer.round_counter = 0
+            self.multiplayer.player1_score_counter = 0
+            self.multiplayer.player2_score_counter = 0
             self.run_game()
-
         else:
             self.rerun_game = False
