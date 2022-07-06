@@ -5,10 +5,16 @@ class Game:
     def __init__(self):
         self.ai = Ai()
         self.human = Human()
+        self.player_1 = Human()
+        self.player_2 = Human()
         self.human_gesture = None
         self.ai_gesture = None
+        self.player_1_gesture = None 
+        self.player_2_gesture = None 
         self.human_score_counter = 0
         self.ai_score_counter = 0
+        self.player_1_counter = 0
+        self.player_2_counter = 0
         self.round_counter = 0
         self.rerun_game = None
 
@@ -16,19 +22,50 @@ class Game:
         self.greeting()
         self.game_rules()
         self.game_mode()
-        while self.human_score_counter != 2 and self.ai_score_counter != 2:
+        # while self.human_score_counter != 2 and self.ai_score_counter != 2:
+        #     self.players_picked_gestures()
+        #     print(self.ai_gesture)
+        #     self.compare_gestures()
+        #     print(self.ai_score_counter, self.human_score_counter)
+        #     self.round_counter += 1
+        #     self.score_comparison()
+        # self.is_rerun_game()
+        # if self.rerun_game == True:
+        #     self.rerun_game = False
+        #     self.ai_score_counter = 0
+        #     self.human_score_counter = 0
+        #     self.run_game()
+    
+    def run_singleplayer(self):
+         while self.human_score_counter != 2 and self.ai_score_counter != 2:
             self.players_picked_gestures()
             print(self.ai_gesture)
             self.compare_gestures()
             print(self.ai_score_counter, self.human_score_counter)
             self.round_counter += 1
             self.score_comparison()
-        self.is_rerun_game()
-        if self.rerun_game == True:
+         self.is_rerun_game()
+         if self.rerun_game == True:
             self.rerun_game = False
             self.ai_score_counter = 0
             self.human_score_counter = 0
             self.run_game()
+    
+    def run_multiplayer(self):
+         while self.player_1_counter != 2 and self.player_2_counter != 2:
+            self.players_picked_gestures()
+            print(self.player_1_gesture)
+            self.compare_gestures()
+            print(self.player_1_counter, self.player_2_counter)
+            self.round_counter += 1
+            self.score_comparison()
+         self.is_rerun_game()
+         if self.rerun_game == True:
+            self.rerun_game = False
+            self.player_1_counter = 0
+            self.player_2_counter = 0
+            self.run_game()
+    
 
     def greeting(self):
         print('Welcome to RPSLS!')
@@ -40,6 +77,8 @@ class Game:
         print('1. Single game\n2. Multiplayer')
         user_input = input('Please, select a game mode: ')
         if user_input == '1':
+            self.run_singleplayer()
+        if user_input == '2':
             pass
         
     def players_picked_gestures(self):
