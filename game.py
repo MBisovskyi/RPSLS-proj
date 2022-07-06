@@ -30,7 +30,6 @@ class Game:
             self.human_score_counter = 0
             self.run_game()
 
-
     def greeting(self):
         print('Welcome to RPSLS!')
 
@@ -69,13 +68,14 @@ class Game:
         if self.ai_gesture == 'Lizard' or self.ai_gesture == 'Scissors':
             print(f'Player wins!')
             print(f'Rock crushes {self.ai_gesture}')
-            self.human_score_counter += 1
+            player_wins = True 
         elif self.ai_gesture == 'Paper':
             print(f'Ai wins. {self.ai_gesture} covers rock!')
-            self.ai_score_counter += 1
+            player_wins = False 
         elif self.ai_gesture == 'Spock':
             print(f'Ai wins. {self.ai_gesture} vaporizes rock!')
-            self.ai_score_counter += 1
+            player_wins = False 
+        self.round_winner(player_wins)
             
     def paper_wins(self):
         if self.ai_gesture == 'Rock':
@@ -99,49 +99,52 @@ class Game:
         if self.ai_gesture == 'Paper':
             print(f'Player wins!')
             print(f'Scissors cuts paper!')
-            self.human_score_counter += 1
+            player_wins = True
         elif self.ai_gesture == 'Lizard':
             print(f'Player wins!')
             print(f'Scissors decapitates Lizard!')
-            self.human_score_counter += 1
+            player_wins = True
         elif self.ai_gesture == 'Rock':
             print(f'Ai wins. {self.ai_gesture} crushes scissors!')
-            self.ai_score_counter += 1
+            player_wins = False
         elif self.ai_gesture == 'Spock':
             print(f'Ai wins. {self.ai_gesture} smashes scissors!')
-            self.ai_score_counter += 1
-        
+            player_wins = False
+        self.round_winner(player_wins)
+
     def lizard_wins(self):
         if self.ai_gesture == 'Spock':
             print(f'Player wins!')
             print(f'Lizard poisons spock!')
-            self.human_score_counter += 1
+            player_wins = True
         elif self.ai_gesture == 'Paper':
             print(f'Player wins!')
             print(f'Lizard eats paper')
-            self.human_score_counter += 1
+            player_wins = True
         elif self.ai_gesture == 'Rock':
             print(f'Ai wins. {self.ai_gesture} crushes lizard!')
-            self.ai_score_counter += 1
+            player_wins = False
         elif self.ai_gesture == 'Scissors':
             print(f'Ai wins. {self.ai_gesture} decapitates lizard!')
-            self.ai_score_counter += 1
+            player_wins = False
+        self.round_winner(player_wins)
 
     def spock_wins(self):
         if self.ai_gesture == 'Scissors':
             print(f'Player wins!')
             print(f'Spock smashes scissors!')
-            self.human_score_counter += 1
+            player_wins = True
         if self.ai_gesture == 'Rock':
             print(f'Player wins!')
             print(f'Spock vaporizes rock!')
-            self.human_score_counter += 1
+            player_wins = True
         elif self.ai_gesture == 'Lizard':
             print(f'Ai wins. {self.ai_gesture} poisons spock!')
-            self.ai_score_counter += 1
+            player_wins = False
         elif self.ai_gesture == 'Paper':
             print(f'Ai wins. {self.ai_gesture} disproves spock!')
-            self.ai_score_counter += 1
+            player_wins = False
+        self.round_winner(player_wins)
 
     def score_comparison(self):
         if self.human_score_counter == 2:
