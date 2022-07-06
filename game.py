@@ -12,7 +12,8 @@ class Game:
         self.greeting()
         self.game_rules()
         self.players_picked_gestures()
-        self.compare_gestures
+        print(self.ai_gesture)
+        self.compare_gestures()
 
     def greeting(self):
         print('Welcome to RPSLS!')
@@ -31,9 +32,19 @@ class Game:
         self.ai_gesture = self.ai.picked_gesture()
 
     def compare_gestures(self):
-        if self.human_gesture == 'Rock':
+        if self.human_gesture == self.ai_gesture:
+            self.tie_result()
+        elif self.human_gesture == 'Rock':
             self.rock_wins()
-
+        elif self.human_gesture == 'Paper':
+            self.paper_wins()
+        elif self.human_gesture == 'Scissors':
+            self.scissors_wins()
+        elif self.human_gesture == 'Lizard':
+            self.lizard_wins()
+        elif self.human_gesture == 'Spock':
+            self.spock_wins()
+    
     def tie_result(self):
         if self.human_gesture == self.ai_gesture:
             print(f'No one wins. Player picked {self.human_gesture} and Ai picked {self.ai_gesture}!')
@@ -43,10 +54,58 @@ class Game:
             print(f'Player wins!')
             print(f'Rock crushes {self.ai_gesture}')
         elif self.ai_gesture == 'Paper':
-            print(f'Ai wins. {self.ai_gesture} covers Rock.')
+            print(f'Ai wins. {self.ai_gesture} covers rock!')
         elif self.ai_gesture == 'Spock':
-            print(f'Ai wins. {self.ai_gesture} veporizes Rock')
+            print(f'Ai wins. {self.ai_gesture} vaporizes rock!')
 
-    
+    def paper_wins(self):
+        if self.ai_gesture == 'Rock':
+            print(f'Player wins!')
+            print(f'Paper covers Rock!')
+        elif self.ai_gesture == 'Spock':
+            print(f'Player wins!')
+            print(f'Paper disproves Spock!')
+        elif self.ai_gesture == 'Scissors':
+            print(f'Ai wins. {self.ai_gesture} cuts paper!')
+        elif self.ai_gesture == 'Lizard':
+            print(f'Ai wins. {self.ai_gesture} eats paper!')
+
+    def scissors_wins(self):
+        if self.ai_gesture == 'Paper':
+            print(f'Player wins!')
+            print(f'Scissors cuts paper!')
+        elif self.ai_gesture == 'Lizard':
+            print(f'Player wins!')
+            print(f'Scissors decapitates Lizard!')
+        elif self.ai_gesture == 'Rock':
+            print(f'Ai wins. {self.ai_gesture} crushes scissors!')
+        elif self.ai_gesture == 'Spock':
+            print(f'Ai wins. {self.ai_gesture} smashes scissors!')
+        
+    def lizard_wins(self):
+        if self.ai_gesture == 'Spock':
+            print(f'Player wins!')
+            print(f'Lizard poisons spock!')
+        elif self.ai_gesture == 'Paper':
+            print(f'Player wins!')
+            print(f'Lizard eats paper')
+        elif self.ai_gesture == 'Rock':
+            print(f'Ai wins. {self.ai_gesture} crushes lizard!')
+        elif self.ai_gesture == 'Scissors':
+            print(f'Ai wins. {self.ai_gesture} decapitates lizard!')
+
+    def spock_wins(self):
+        if self.ai_gesture == 'Scissors':
+            print(f'Player wins!')
+            print(f'Spock smashes scissors!')
+        if self.ai_gesture == 'Rock':
+            print(f'Player wins!')
+            print(f'Spock vaporizes rock!')
+        elif self.ai_gesture == 'Lizard':
+            print(f'Ai wins. {self.ai_gesture} poisons spock!')
+        elif self.ai_gesture == 'Paper':
+            print(f'Ai wins. {self.ai_gesture} disproves spock!')
+
+
 
 
