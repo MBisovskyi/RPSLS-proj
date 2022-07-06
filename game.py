@@ -9,18 +9,27 @@ class Game:
         self.ai_gesture = None
         self.human_score_counter = 0
         self.ai_score_counter = 0
+        self.round_counter = 0
+        self.rerun_game = None
 
     def run_game(self):
         self.greeting()
         self.game_rules()
-        round = 0
+        self.game_mode()
         while self.human_score_counter != 2 and self.ai_score_counter != 2:
             self.players_picked_gestures()
             print(self.ai_gesture)
             self.compare_gestures()
             print(self.ai_score_counter, self.human_score_counter)
-            round += 1
+            self.round_counter += 1
             self.score_comparison()
+        self.is_rerun_game()
+        if self.rerun_game == True:
+            self.rerun_game = False
+            self.ai_score_counter = 0
+            self.human_score_counter = 0
+            self.run_game()
+
 
     def greeting(self):
         print('Welcome to RPSLS!')
@@ -72,17 +81,19 @@ class Game:
         if self.ai_gesture == 'Rock':
             print(f'Player wins!')
             print(f'Paper covers Rock!')
-            self.human_score_counter += 1
+            player_wins = True
         elif self.ai_gesture == 'Spock':
             print(f'Player wins!')
             print(f'Paper disproves Spock!')
-            self.human_score_counter += 1
+            player_wins = True
         elif self.ai_gesture == 'Scissors':
             print(f'Ai wins. {self.ai_gesture} cuts paper!')
-            self.ai_score_counter += 1
+            player_wins = False
         elif self.ai_gesture == 'Lizard':
             print(f'Ai wins. {self.ai_gesture} eats paper!')
-            self.ai_score_counter += 1
+            player_wins = False
+        self.round_winner(player_wins)
+        
 
     def scissors_wins(self):
         if self.ai_gesture == 'Paper':
@@ -138,3 +149,15 @@ class Game:
         elif self.ai_score_counter == 2:
             print('Ai won this game')      
 
+    def is_rerun_game(self):
+        user_input = input('Would you like to play again? Y/N?" ').lower()
+        if user_input == 'y' or user_input == 'yes':
+            self.rerun_game = True
+        else:
+            self.rerun_game = False
+    
+    def round_winner(self, player_wins):
+        if player_wins == True:
+            self.human_score_counter += 1
+        else:
+            self.ai_score_counter += 1
